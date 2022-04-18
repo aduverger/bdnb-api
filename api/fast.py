@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import geopandas as gpd
 import math
+import json
 from geopy.geocoders import Nominatim
 from pyproj import Transformer
 import os
@@ -51,7 +52,7 @@ def get_bbox(xmin: float, xmax: float, ymin: float, ymax: float):
         },
         inplace=True,
     )
-    return gdf.to_json()
+    return json.loads(gdf.to_json())
 
 
 @app.get("/getaddress")
