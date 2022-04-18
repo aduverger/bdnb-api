@@ -1,0 +1,7 @@
+numpy
+geopandas
+geopy
+pyproj
+matplotlib
+mapclassify
+fastapi
