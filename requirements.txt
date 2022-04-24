@@ -5,4 +5,3 @@ geopy
 pyproj
 fastapi
 uvicorn
-gunicorn
