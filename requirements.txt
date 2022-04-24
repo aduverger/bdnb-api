@@ -1,4 +1,6 @@
 geopandas
+pandas
+numpy
 geopy
 pyproj
 fastapi

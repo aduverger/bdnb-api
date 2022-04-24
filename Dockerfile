@@ -1,9 +1,9 @@
-FROM python:3.8.6-buster
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
-COPY api /api
-COPY data /data
-COPY requirements.txt /requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-CMD uvicorn api.fast:app --host 0.0.0.0 --port $PORT
+COPY ./app /app
+
+COPY ./data /app/data
