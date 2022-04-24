@@ -42,12 +42,12 @@ def get_bbox(xmin: float, xmax: float, ymin: float, ymax: float):
         ]
     ].apply(lambda x: calculate_SHAB(*x), axis=1)
     gdf.adedpe202006_logtype_ch_type_ener_corr.replace(
-        to_replace="", value=np.NaN, inplace=True
+        to_replace="", value="N.C.", inplace=True
     )
     gdf.adedpe202006_logtype_ecs_type_ener.replace(
-        to_replace="", value=np.NaN, inplace=True
+        to_replace="", value="N.C.", inplace=True
     )
-    gdf.fillna(np.NaN, inplace=True)
+    gdf.fillna("N.C.", inplace=True)
 
     gdf["Types d'énergie"] = gdf[
         ["adedpe202006_logtype_ch_type_ener_corr", "adedpe202006_logtype_ecs_type_ener"]
@@ -89,9 +89,9 @@ def get_bbox(xmin: float, xmax: float, ymin: float, ymax: float):
         }
     )
     gdf["Etiquette énergétique (DPE)"].replace(
-        to_replace="N", value=np.NaN, inplace=True
+        to_replace="N", value="N.C.", inplace=True
     )
-    gdf["Etiquette carbone (DPE)"].replace(to_replace="N", value=np.NaN, inplace=True)
+    gdf["Etiquette carbone (DPE)"].replace(to_replace="N", value="N.C.", inplace=True)
 
     return json.loads(gdf.to_json())
 
@@ -123,9 +123,9 @@ def calculate_SHAB(nb_log, shab, type_bat):
 def get_ener_type(type_chauf, type_ecs):
     if type_chauf == type_ecs:
         return type_chauf if type(type_chauf) == list else [type_chauf]
-    if pd.isnull(type_chauf):
+    if type_chauf == "N.C.":
         return type_ecs if type(type_ecs) == list else [type_ecs]
-    if pd.isnull(type_ecs):
+    if type_ecs == "N.C.":
         return type_chauf if type(type_chauf) == list else [type_chauf]
     type_chauf = type_chauf.split(" + ")
     type_ecs = type_ecs.split(" + ")
