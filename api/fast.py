@@ -28,7 +28,8 @@ def get_bbox(xmin: float, xmax: float, ymin: float, ymax: float):
     gdf = gpd.read_file(
         os.path.join(
             os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
-            os.path.join("data", "bnb_export.gpkg"),
+            "data",
+            "bnb_export.gpkg",
         ),
         bbox=(xmin, ymin, xmax, ymax),
     )
